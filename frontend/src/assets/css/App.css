@@ -1304,3 +1304,392 @@ input:checked + .toggle-slider:before {
   opacity: 0.1;
   color: #1F2937;
 }
+
+/* ========================================
+   LOGIN PAGE STYLING
+   ======================================== */
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+}
+
+.login-box {
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 450px;
+  overflow: hidden;
+}
+
+.login-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 3rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+.login-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  font-size: 2.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.login-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.login-header p {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.login-form {
+  padding: 2.5rem 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.form-group label i {
+  color: #667eea;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #E5E7EB;
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.error-message {
+  background: #FEF2F2;
+  border: 1px solid #FCA5A5;
+  color: #DC2626;
+  padding: 0.875rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-login:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.btn-login:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.demo-credentials {
+  padding: 0 2rem 2rem;
+  border-top: 1px solid #E5E7EB;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+.demo-title {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6B7280;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.demo-buttons {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.demo-btn {
+  padding: 1rem;
+  border: 2px solid #E5E7EB;
+  border-radius: 0.75rem;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+}
+
+.demo-btn:hover {
+  border-color: #667eea;
+  background: #F9FAFB;
+  transform: translateY(-2px);
+}
+
+.demo-btn.admin {
+  color: #DC2626;
+}
+
+.demo-btn.admin i {
+  color: #DC2626;
+  font-size: 1.25rem;
+}
+
+.demo-btn.user {
+  color: #2563EB;
+}
+
+.demo-btn.user i {
+  color: #2563EB;
+  font-size: 1.25rem;
+}
+
+.demo-btn span {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: #9CA3AF;
+  font-family: 'Courier New', monospace;
+}
+
+.login-footer {
+  background: #F9FAFB;
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: #6B7280;
+}
+
+/* User Info in Header */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: #F3F4F6;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  color: #1F2937;
+}
+
+.user-badge i {
+  color: #667eea;
+}
+
+.btn-logout {
+  padding: 0.5rem 1rem;
+  background: #EF4444;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s;
+}
+
+.btn-logout:hover {
+  background: #DC2626;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Surgery History Badges */
+.surgery-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.surgery-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: #ECFDF5;
+  border: 1px solid #D1FAE5;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  color: #065F46;
+}
+
+.surgery-badge i {
+  color: #10B981;
+  font-size: 0.875rem;
+}
+
+/* Document Upload Progress */
+.document-progress {
+  margin-top: 0.5rem;
+}
+
+.document-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.doc-count {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1F2937;
+}
+
+.doc-status {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.doc-status.complete {
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #D1FAE5;
+}
+
+.doc-status.complete i {
+  color: #10B981;
+}
+
+.progress-bar-doc {
+  height: 8px;
+  background: #F3F4F6;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progress-fill-doc {
+  height: 100%;
+  background: linear-gradient(90deg, #10B981, #059669);
+  border-radius: 1rem;
+  transition: width 0.6s ease;
+}
+
+/* Document List */
+.document-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.doc-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #F9FAFB;
+  border-radius: 0.5rem;
+  font-size: 0.8125rem;
+  border: 1px solid #E5E7EB;
+}
+
+.doc-item.uploaded {
+  background: #F0FDF4;
+  border-color: #86EFAC;
+}
+
+.doc-item i:first-child {
+  color: #6B7280;
+  font-size: 1rem;
+  width: 20px;
+  text-align: center;
+}
+
+.doc-item.uploaded i:first-child {
+  color: #10B981;
+}
+
+.doc-item span {
+  flex: 1;
+  color: #1F2937;
+  font-weight: 500;
+}
+
+.doc-check {
+  color: #10B981;
+  font-size: 0.875rem;
+}
+
+/* Updated status badge */
+.status-badge.ready {
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #6EE7B7;
+}
+
+.status-badge.ready i {
+  color: #10B981;
+}

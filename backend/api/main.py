@@ -20,6 +20,9 @@ from agents.policy_agent import PolicyAgent
 from agents.submission_agent import SubmissionAgent
 from agents.appeal_agent import AppealAgent
 
+# Import authentication
+from utils.auth import require_auth, get_current_user_role
+
 # Initialize agents
 intake_agent = IntakeAgent()
 clinical_agent = ClinicalAnalystAgent()
@@ -36,14 +39,57 @@ def health_check():
         'service': 'AutoAuth Agent Platform'
     })
 
+@app.route('/api/auth/login', methods=['POST'])
+def login():
+    """
+    Login endpoint - validates credentials and returns token
+    Body: { "username": "admin" or "user", "password": "password" }
+    """
+    data = request.json
+    username = data.get('username')
+    password = data.get('password')
+    
+    # Simple credential check (in production, use hashed passwords and database)
+    if username == 'admin' and password == 'admin123':
+        return jsonify({
+            'success': True,
+            'token': 'ADMIN_SECRET_2024_AUTOAUTH',
+            'role': 'admin',
+            'message': 'Admin login successful'
+        })
+    elif username == 'user' and password == 'user123':
+        return jsonify({
+            'success': True,
+            'token': 'USER_SECRET_2024_AUTOAUTH',
+            'role': 'user',
+            'message': 'User login successful'
+        })
+    else:
+        return jsonify({
+            'success': False,
+            'error': 'Invalid credentials'
+        }), 401
+
+@app.route('/api/auth/verify', methods=['GET'])
+@require_auth()
+def verify_token():
+    """Verify token and return user info"""
+    role = get_current_user_role()
+    return jsonify({
+        'valid': True,
+        'role': role,
+        'timestamp': datetime.now().isoformat()
+    })
+
 @app.route('/api/pa-requests', methods=['GET'])
+@require_auth()  # Requires any authenticated user
 def get_pa_requests():
     """Get all pending PA requests"""
     # In production, this would query database
     return jsonify([
         {
             'id': 'PA-2024-001',
-            'patientName': 'Arun Pandey',
+            'patientName': 'John Doe',
             'patientId': 'PT-12345',
             'procedure': 'Total Knee Arthroplasty',
             'procedureCode': 'CPT-27447',
@@ -56,14 +102,16 @@ def get_pa_requests():
     ])
 
 @app.route('/api/pa-requests', methods=['POST'])
+@require_auth('admin')  # Only admin can create PA requests
 def create_pa_request():
-    """Create new PA request"""
+    """Create new PA request - ADMIN ONLY"""
     data = request.json
     # In production, save to database
     return jsonify({
         'id': f"PA-2024-{int(time.time())}",
         'status': 'created',
-        'message': 'PA request created successfully'
+        'message': 'PA request created successfully',
+        'createdBy': get_current_user_role()
     }), 201
 
 @app.route('/api/agents/intake-agent', methods=['POST'])
@@ -148,14 +196,18 @@ def run_appeal_agent():
     })
 
 @app.route('/api/process/complete', methods=['POST'])
+@require_auth()  # Requires authentication
 def process_complete_workflow():
     """Run complete PA workflow through all agents"""
     data = request.json
     pa_request_id = data.get('paRequestId')
     
+    user_role = get_current_user_role()
+    
     workflow_results = {
         'paRequestId': pa_request_id,
         'startTime': datetime.now().isoformat(),
+        'processedBy': user_role,
         'steps': []
     }
     

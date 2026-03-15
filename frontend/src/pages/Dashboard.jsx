@@ -23,7 +23,7 @@ const Dashboard = () => {
       setPaRequests([
         {
           id: 'PA-2024-001',
-          patientName: 'John Doe',
+          patientName: 'Vinay Varma',
           procedure: 'Total Knee Arthroplasty',
           status: 'pending',
           priority: 'high'
@@ -34,6 +34,10 @@ const Dashboard = () => {
 
   const startDemo = (requestId) => {
     setActiveDemo(requestId);
+  };
+
+  const resetDemo = () => {
+    setActiveDemo(null);
   };
 
   return (
@@ -67,6 +71,15 @@ const Dashboard = () => {
             </span>
           )}
         </div>
+        {activeDemo && (
+          <button 
+            className="btn-reset"
+            onClick={resetDemo}
+          >
+            <i className="fas fa-redo"></i>
+            Reset Demo
+          </button>
+        )}
       </div>
 
       <div className="dashboard-grid">
