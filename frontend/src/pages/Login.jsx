@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../assets/css/LoginNew.css';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -24,11 +25,8 @@ const Login = ({ onLogin }) => {
       const data = await response.json();
 
       if (data.success) {
-        // Store token and role in localStorage
         localStorage.setItem('authToken', data.token);
         localStorage.setItem('userRole', data.role);
-        
-        // Call parent callback
         onLogin(data.token, data.role);
       } else {
         setError(data.error || 'Login failed');
@@ -37,7 +35,6 @@ const Login = ({ onLogin }) => {
       // Backend not running - use demo mode
       console.log('Backend not available, using demo mode');
       
-      // Validate credentials locally
       if (username === 'admin' && password === 'admin123') {
         const token = 'ADMIN_SECRET_2024_AUTOAUTH';
         const role = 'admin';
@@ -69,96 +66,144 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <div className="login-header">
-          <div className="login-icon">
+    <div className="login-page">
+      <div className="login-left">
+        <div className="login-branding">
+          <div className="brand-icon">
             <i className="fas fa-robot"></i>
           </div>
-          <h1>AutoAuth Agent Platform</h1>
-          <p>Multi-Agent AI for Prior Authorization</p>
-        </div>
-
-        <form onSubmit={handleLogin} className="login-form">
-          <div className="form-group">
-            <label>
-              <i className="fas fa-user"></i>
-              Username
-            </label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter username"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>
-              <i className="fas fa-lock"></i>
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-              required
-            />
-          </div>
-
-          {error && (
-            <div className="error-message">
-              <i className="fas fa-exclamation-circle"></i>
-              {error}
+          <h1>AutoAuth Agent</h1>
+          <p className="brand-tagline">Intelligent Prior Authorization Platform</p>
+          
+          <div className="feature-list">
+            <div className="feature-item">
+              <div className="feature-icon">
+                <i className="fas fa-bolt"></i>
+              </div>
+              <div className="feature-text">
+                <h3>96% Faster</h3>
+                <p>Process PA in 15 minutes vs 3-7 days</p>
+              </div>
             </div>
-          )}
+            
+            <div className="feature-item">
+              <div className="feature-icon">
+                <i className="fas fa-brain"></i>
+              </div>
+              <div className="feature-text">
+                <h3>AI-Powered</h3>
+                <p>5 specialized agents working together</p>
+              </div>
+            </div>
+            
+            <div className="feature-item">
+              <div className="feature-icon">
+                <i className="fas fa-chart-line"></i>
+              </div>
+              <div className="feature-text">
+                <h3>95% Approval</h3>
+                <p>Higher success rate with AI analysis</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          <button type="submit" className="btn-login" disabled={loading}>
-            {loading ? (
-              <>
-                <i className="fas fa-spinner fa-spin"></i>
-                Logging in...
-              </>
-            ) : (
-              <>
-                <i className="fas fa-sign-in-alt"></i>
-                Login
-              </>
+      <div className="login-right">
+        <div className="login-card">
+          <div className="login-header-new">
+            <h2>Welcome Back</h2>
+            <p>Sign in to access the platform</p>
+          </div>
+
+          <form onSubmit={handleLogin} className="login-form-new">
+            <div className="input-group">
+              <label>Username</label>
+              <div className="input-wrapper">
+                <i className="fas fa-user"></i>
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter your username"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="input-group">
+              <label>Password</label>
+              <div className="input-wrapper">
+                <i className="fas fa-lock"></i>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  required
+                />
+              </div>
+            </div>
+
+            {error && (
+              <div className="error-alert">
+                <i className="fas fa-exclamation-circle"></i>
+                {error}
+              </div>
             )}
-          </button>
-        </form>
 
-        <div className="demo-credentials">
-          <p className="demo-title">
-            <i className="fas fa-info-circle"></i>
-            Demo Credentials
-          </p>
-          <div className="demo-buttons">
+            <button type="submit" className="btn-login-new" disabled={loading}>
+              {loading ? (
+                <>
+                  <i className="fas fa-spinner fa-spin"></i>
+                  Signing in...
+                </>
+              ) : (
+                <>
+                  <i className="fas fa-sign-in-alt"></i>
+                  Sign In
+                </>
+              )}
+            </button>
+          </form>
+
+          <div className="divider">
+            <span>Or use demo accounts</span>
+          </div>
+
+          <div className="demo-grid">
             <button 
-              className="demo-btn admin"
+              className="demo-card admin"
               onClick={() => quickLogin('admin')}
               type="button"
             >
-              <i className="fas fa-user-shield"></i>
-              Admin Demo
-              <span>admin / admin123</span>
+              <div className="demo-icon">
+                <i className="fas fa-user-shield"></i>
+              </div>
+              <div className="demo-info">
+                <h4>Administrator</h4>
+                <p>Full system access</p>
+              </div>
             </button>
+
             <button 
-              className="demo-btn user"
+              className="demo-card coordinator"
               onClick={() => quickLogin('user')}
               type="button"
             >
-              <i className="fas fa-user"></i>
-              User Demo
-              <span>user / user123</span>
+              <div className="demo-icon">
+                <i className="fas fa-clipboard-check"></i>
+              </div>
+              <div className="demo-info">
+                <h4>PA Coordinator</h4>
+                <p>Process PA requests</p>
+              </div>
             </button>
           </div>
-        </div>
 
-        <div className="login-footer">
-          <p>Virtusa Jatayu Season 5 | AutoAuth Agent Team</p>
+          <div className="login-footer-new">
+            <p>Virtusa Jatayu Season 5 Hackathon</p>
+          </div>
         </div>
       </div>
     </div>

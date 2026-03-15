@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Dashboard from './pages/Dashboard';
+import AdminDashboard from './pages/AdminDashboard';
+import UserDashboard from './pages/UserDashboard';
 import Analytics from './pages/Analytics';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
@@ -63,7 +64,7 @@ function App() {
   }
 
   return (
-    <div className="app-container">
+    <div className={`app-container ${userRole}-theme`}>
       <header className="app-header">
         <div className="logo-section">
           <i className="fas fa-robot"></i>
@@ -87,9 +88,9 @@ function App() {
             )}
           </nav>
           <div className="user-info">
-            <div className="user-badge">
-              <i className={userRole === 'admin' ? 'fas fa-user-shield' : 'fas fa-user'}></i>
-              <span>{userRole === 'admin' ? 'Admin' : 'User'}</span>
+            <div className={`user-badge ${userRole}`}>
+              <i className={userRole === 'admin' ? 'fas fa-user-shield' : 'fas fa-clipboard-check'}></i>
+              <span>{userRole === 'admin' ? 'Admin' : 'PA Coordinator'}</span>
             </div>
             <button className="btn-logout" onClick={handleLogout}>
               <i className="fas fa-sign-out-alt"></i>
@@ -100,13 +101,18 @@ function App() {
       </header>
 
       <main className="app-main">
-        {currentView === 'dashboard' && <Dashboard authToken={authToken} userRole={userRole} />}
+        {currentView === 'dashboard' && userRole === 'admin' && (
+          <AdminDashboard authToken={authToken} userRole={userRole} />
+        )}
+        {currentView === 'dashboard' && userRole === 'user' && (
+          <UserDashboard authToken={authToken} userRole={userRole} />
+        )}
         {currentView === 'analytics' && <Analytics authToken={authToken} userRole={userRole} />}
         {currentView === 'settings' && userRole === 'admin' && <Settings authToken={authToken} />}
       </main>
 
       <footer className="app-footer">
-        <p>AutoAuth Agent Platform v1.0 | Virtusa Jatayu Season 5</p>
+        <p>AutoAuth Agent Platform v1.0 | Virtusa Jatayu Season 5 | Logged in as: {userRole === 'admin' ? 'Administrator' : 'PA Coordinator'}</p>
       </footer>
     </div>
   );
