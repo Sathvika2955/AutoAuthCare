@@ -1,0 +1,23 @@
+Flask==3.0.0
+flask-cors==4.0.0
+python-dotenv==1.0.0
+requests==2.31.0
+
+# For NLP (Clinical Analyst Agent)
+transformers==4.36.0
+torch==2.5.1
+scikit-learn==1.3.2
+
+# For RAG (Policy Agent)
+langchain==0.1.0
+openai==1.6.1
+pinecone-client==3.0.0
+sentence-transformers==2.2.2
+
+# Database
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+
+# Utilities
+pydantic==2.5.3
+python-dateutil==2.8.2
