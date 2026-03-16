@@ -89,7 +89,7 @@ def get_pa_requests():
     return jsonify([
         {
             'id': 'PA-2024-001',
-            'patientName': 'John Doe',
+            'patientName': 'Vinay Varma',
             'patientId': 'PT-12345',
             'procedure': 'Total Knee Arthroplasty',
             'procedureCode': 'CPT-27447',
